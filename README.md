@@ -34,7 +34,7 @@ Pomodoro Timer runs work and break cycles with a visual countdown, session histo
 ````bash
 npm install
 npm run dev
-\```
+````
 
 ---
 
@@ -44,4 +44,3 @@ npm run dev
 - Customizable work and break durations
 - Start, pause, resume, and reset controls
 - Session history with start time, end time, and duration
-````
