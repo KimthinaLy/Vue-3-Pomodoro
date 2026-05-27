@@ -5,7 +5,8 @@ import HistoryList from './components/HistoryList.vue'
 import TimingCard from './components/TimingCard.vue'
 import InputTiming from './components/InputTiming.vue'
 
-const seconds = ref(12)
+const workDuration = ref(0)
+const breakDuration = ref(0)
 
 const historyLogs = ref<HistoryLog[]>([])
 
@@ -13,8 +14,9 @@ function addHistoryLog(log: HistoryLog) {
   historyLogs.value.push(log)
 }
 
-function setSeconds(s: number) {
-  seconds.value = s
+function setTiming(timing: { workSeconds: number, breakSeconds: number }) {
+  workDuration.value = timing.workSeconds
+  breakDuration.value = timing.breakSeconds
 }
 
 </script>
@@ -25,10 +27,9 @@ function setSeconds(s: number) {
       Pomodoro Timer
     </h1>
   </header>
-
   <main>
-    <InputTiming @setSeconds="setSeconds" />
-    <TimingCard @addHistoryLog="addHistoryLog" />
+    <InputTiming @setTiming="setTiming" />
+    <TimingCard :workDuration="workDuration" :breakDuration="breakDuration" @addHistoryLog="addHistoryLog" />
     <HistoryList :historyLogs="historyLogs" />
   </main>
 </template>

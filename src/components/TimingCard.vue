@@ -2,10 +2,15 @@
 import ActionButtons from './ActionButtons.vue'
 import { computed, ref, watch, onUnmounted } from 'vue'
 
+const props = defineProps<{
+    workDuration: number
+    breakDuration: number
+}>()
+
 const emit = defineEmits(['addHistoryLog'])
 
 const isWorking = ref(true)
-const seconds = ref(12)
+const seconds = ref(props.workDuration)
 let intervalId = 0
 const startTime = ref<Date | null>(null)
 const isRunning = ref(false)
@@ -34,9 +39,9 @@ watch(seconds, (newSeconds) => {
 function switchTimingMode() {
     isWorking.value = !isWorking.value
     if (isWorking.value) {
-        seconds.value = 12
+        seconds.value = props.workDuration
     } else {
-        seconds.value = 3
+        seconds.value = props.breakDuration
     }
     startTime.value = null
 }
@@ -53,7 +58,11 @@ function startTiming() {
 
 function resetTiming() {
     stopTiming()
-    seconds.value = 12
+    if (isWorking.value) {
+        seconds.value = props.workDuration
+    } else {
+        seconds.value = props.breakDuration
+    }
     startTime.value = null
 }
 
@@ -71,6 +80,16 @@ function stopTiming() {
     isRunning.value = false
 }
 
+watch(() => props.workDuration, (newWorkDuration) => {
+    if (isWorking.value) {
+        seconds.value = newWorkDuration
+    }
+})
+watch(() => props.breakDuration, (newBreakDuration) => {
+    if (!isWorking.value) {
+        seconds.value = newBreakDuration
+    }
+})
 onUnmounted(stopTiming)
 </script>
 
