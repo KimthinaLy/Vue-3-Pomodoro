@@ -100,10 +100,5 @@ onUnmounted(stopTiming)
       <h3>Congratulation for Completing this task</h3>
       <div>Let's take a break</div>
     </div>
-    <p v-for='history in historyLogs' :key='history.id'>
-      {{ history.duration }}
-      {{ history.startTime }}
-      {{ history.endTime }}
-    </p>
   </main>
 </template>
