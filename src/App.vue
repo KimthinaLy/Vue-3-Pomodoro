@@ -5,8 +5,8 @@ import HistoryList from './components/HistoryList.vue'
 import TimingCard from './components/TimingCard.vue'
 import InputTiming from './components/InputTiming.vue'
 
-const workDuration = ref(0)
-const breakDuration = ref(0)
+const workDuration = ref(1200)
+const breakDuration = ref(300)
 
 const historyLogs = ref<HistoryLog[]>([])
 

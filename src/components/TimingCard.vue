@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ActionButtons from './ActionButtons.vue'
-import { computed, ref, watch, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+
+let audioContext: AudioContext | null = null
 
 const props = defineProps<{
     workDuration: number
@@ -32,6 +34,7 @@ watch(seconds, (newSeconds) => {
             endTime: new Date().toISOString(),
             duration: (new Date().getTime() - (startTime.value ? new Date(startTime.value).getTime() : 0)) / 1000
         })
+        playSound()
         switchTimingMode()
     }
 })
@@ -54,6 +57,8 @@ function startTiming() {
             seconds.value -= 1
         }, 1000
     )
+
+    audioContext?.resume()
 }
 
 function resetTiming() {
@@ -90,7 +95,35 @@ watch(() => props.breakDuration, (newBreakDuration) => {
         seconds.value = newBreakDuration
     }
 })
-onUnmounted(stopTiming)
+
+onMounted(() => {
+    audioContext = new AudioContext()
+})
+onUnmounted(() => {
+    stopTiming()
+    if (audioContext) {
+        audioContext.close()
+    }
+})
+
+function playSound() {
+    if (!audioContext) return
+
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
+
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
+
+    oscillator.type = 'sine'
+    oscillator.frequency.setValueAtTime(1000, audioContext.currentTime)
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime)
+
+    oscillator.start()
+    setTimeout(() => {
+        oscillator.stop()
+    }, 2000)
+}
 </script>
 
 <template>

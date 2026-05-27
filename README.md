@@ -1,42 +1,47 @@
-# pomodoro
+# Pomodoro Timer
 
-This template should help get you started developing with Vue 3 in Vite.
+A focus timer app built with Vue 3 and TypeScript — created to practice Vue fundamentals by building something real.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## About
 
-## Recommended Browser Setup
+Pomodoro Timer runs work and break cycles with a visual countdown, session history tracking, and customizable durations.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+**Why I built this:** I'm learning Vue by doing — not just reading docs. This project covers lifecycle hooks, setInterval management, reactivity, component architecture, props/emits, computed properties, watch, and v-model in a practical context.
 
-## Type Support for `.vue` Imports in TS
+---
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Tech Stack
 
-## Customize configuration
+| Tool       | Version |
+| ---------- | ------- |
+| Vue        | 3       |
+| TypeScript | 5       |
+| Vite       | 5       |
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## Setup
 
-```sh
+**Requirements:**
+
+- Node.js 18+
+- VS Code with [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension
+
+**Install and run:**
+
+````bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
+\```
 
-### Type-Check, Compile and Minify for Production
+---
 
-```sh
-npm run build
-```
+## Features
+- Work and break cycle switching
+- Visual countdown formatted as MM:SS
+- Customizable work and break durations
+- Start, pause, resume, and reset controls
+- Session history with start time, end time, and duration
+````
